@@ -1,0 +1,7 @@
+# Cadenas de prueba para L = { a^n b^m | m >= n, n > 0 }
+ab
+aabbb
+aab
+b
+aba
+""

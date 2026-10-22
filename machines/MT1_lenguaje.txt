@@ -1,0 +1,30 @@
+# Practica 2 - MT1: reconoce L = { a^n b^m | m >= n, n > 0 }
+# Q
+q0 q1 q2 q3 qAccept
+# Sigma: simbolos de entrada
+ a b
+# Gamma: blanco, entrada y marcas de trabajo
+. a b X Y
+# Estado inicial
+q0
+# Simbolo blanco ('.' esta reservado y no puede formar parte de la entrada)
+.
+# Estados de aceptacion
+qAccept
+# Numero de cintas
+1
+# Transiciones: estado lectura estado_siguiente escritura movimiento
+q0 X q0 X R
+q0 a q1 X R
+q0 Y q3 Y R
+q1 a q1 a R
+q1 X q1 X R
+q1 Y q1 Y R
+q1 b q2 Y L
+q2 a q2 a L
+q2 X q2 X L
+q2 Y q2 Y L
+q2 . q0 . R
+q3 Y q3 Y R
+q3 b q3 b R
+q3 . qAccept . L

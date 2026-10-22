@@ -1,0 +1,12 @@
+# Demostracion multicinta: copia la entrada de la cinta 1 a la cinta 2.
+# Formato de transicion para k cintas: q leer_1 ... leer_k q' escribir_1 ... escribir_k mov_1 ... mov_k
+qCopy qAccept
+ a b
+. a b
+qCopy
+.
+qAccept
+2
+qCopy a . qCopy a a R R
+qCopy b . qCopy b b R R
+qCopy . . qAccept . . L L

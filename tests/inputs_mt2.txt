@@ -1,0 +1,7 @@
+# Entradas y salidas esperadas en tests/test_turing_machine.cpp
+abbabaabb
+aa
+bb
+a
+b
+""

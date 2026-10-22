@@ -1,0 +1,22 @@
+// Generated automatically from machines/MT1_lenguaje.cfg
+digraph MT1_lenguaje {
+  graph [rankdir=LR, splines=true, overlap=false, outputorder=edgesfirst, pad=0.25, nodesep=0.65, ranksep=0.85, fontname="Arial", fontsize=10, labelloc="t", label="MT1 lenguaje\nLabels: read/write, movement; 'keep' means write the same symbol."];
+  node [shape=circle, fontname="Arial", fontsize=10, margin="0.10,0.07"];
+  edge [fontname="Arial", fontsize=9, arrowsize=0.7];
+  __start [shape=point, label="", width=0.12];
+  __start -> "q0";
+  "q0" [shape=circle, label="q0"];
+  "q1" [shape=circle, label="q1"];
+  "q2" [shape=circle, label="q2"];
+  "q3" [shape=circle, label="q3"];
+  "qAccept" [shape=doublecircle, label="qAccept"];
+  "q0" -> "q0" [label="X: keep, R"];
+  "q0" -> "q1" [label="a/X, R"];
+  "q0" -> "q3" [label="Y: keep, R"];
+  "q1" -> "q1" [label="X,Y,a: keep, R"];
+  "q1" -> "q2" [label="b/Y, L"];
+  "q2" -> "q0" [label=".: keep, R"];
+  "q2" -> "q2" [label="X,Y,a: keep, L"];
+  "q3" -> "q3" [label="Y,b: keep, R"];
+  "q3" -> "qAccept" [label=".: keep, L"];
+}

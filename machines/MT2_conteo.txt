@@ -1,0 +1,137 @@
+# Practica 2 - MT2: transforma w en 1^numero_b . 1^numero_a
+# Si falta un tipo de simbolo, su contador se representa mediante '0'.
+# Q
+qInit qSeekEnd qReturnStart qPlaceA qFindA qSeekAGroup qReturnAGroup qBounceA qSeekDelimiter qPlaceB qReturnToEnd qFindB qSeekBGroup qSeekBBlock qGoToEnd qEraseInput qEraseDelimiter qLocateResult qAccept
+# Sigma
+ a b
+# Gamma: '.' blanco, c/d conservan la identidad del primer simbolo,
+# A/B/C/D son marcas, E marca el fin original, ':' es separador temporal.
+. a b c d A B C D E 0 1 :
+# Estado inicial
+qInit
+# Simbolo blanco
+.
+# Estados de aceptacion
+qAccept
+# Numero de cintas
+1
+# Transiciones para inicializar el fin de entrada y el contador de a
+qInit a qSeekEnd c R
+qInit b qSeekEnd d R
+qInit . qPlaceA E L
+qSeekEnd a qSeekEnd a R
+qSeekEnd b qSeekEnd b R
+qSeekEnd c qSeekEnd c R
+qSeekEnd d qSeekEnd d R
+qSeekEnd . qReturnStart E L
+qReturnStart a qReturnStart a L
+qReturnStart b qReturnStart b L
+qReturnStart c qReturnStart c L
+qReturnStart d qReturnStart d L
+qReturnStart . qFindA 0 R
+qPlaceA . qFindA 0 R
+# Marca todas las a y construye su contador en la zona izquierda
+qFindA a qSeekAGroup A L
+qFindA c qSeekAGroup C L
+qFindA b qFindA b R
+qFindA d qFindA d R
+qFindA A qFindA A R
+qFindA B qFindA B R
+qFindA C qFindA C R
+qFindA D qFindA D R
+qFindA E qSeekDelimiter E L
+qSeekAGroup a qSeekAGroup a L
+qSeekAGroup b qSeekAGroup b L
+qSeekAGroup c qSeekAGroup c L
+qSeekAGroup d qSeekAGroup d L
+qSeekAGroup A qSeekAGroup A L
+qSeekAGroup B qSeekAGroup B L
+qSeekAGroup C qSeekAGroup C L
+qSeekAGroup D qSeekAGroup D L
+qSeekAGroup 0 qFindA 1 R
+qSeekAGroup 1 qSeekAGroup 1 L
+qSeekAGroup . qReturnAGroup 1 R
+qReturnAGroup 1 qReturnAGroup 1 R
+qReturnAGroup a qBounceA a L
+qReturnAGroup b qBounceA b L
+qReturnAGroup c qBounceA c L
+qReturnAGroup d qBounceA d L
+qReturnAGroup A qBounceA A L
+qReturnAGroup B qBounceA B L
+qReturnAGroup C qBounceA C L
+qReturnAGroup D qBounceA D L
+qReturnAGroup E qBounceA E L
+qBounceA 1 qFindA 1 R
+# Coloca el separador y el contador de b a la izquierda del contador de a
+qSeekDelimiter a qSeekDelimiter a L
+qSeekDelimiter b qSeekDelimiter b L
+qSeekDelimiter c qSeekDelimiter c L
+qSeekDelimiter d qSeekDelimiter d L
+qSeekDelimiter A qSeekDelimiter A L
+qSeekDelimiter B qSeekDelimiter B L
+qSeekDelimiter C qSeekDelimiter C L
+qSeekDelimiter D qSeekDelimiter D L
+qSeekDelimiter 0 qSeekDelimiter 0 L
+qSeekDelimiter 1 qSeekDelimiter 1 L
+qSeekDelimiter . qPlaceB : L
+qPlaceB . qReturnToEnd 0 R
+# Recorre el area de trabajo hasta el marcador de fin de entrada
+qReturnToEnd : qReturnToEnd : R
+qReturnToEnd 0 qReturnToEnd 0 R
+qReturnToEnd 1 qReturnToEnd 1 R
+qReturnToEnd a qReturnToEnd a R
+qReturnToEnd b qReturnToEnd b R
+qReturnToEnd c qReturnToEnd c R
+qReturnToEnd d qReturnToEnd d R
+qReturnToEnd A qReturnToEnd A R
+qReturnToEnd B qReturnToEnd B R
+qReturnToEnd C qReturnToEnd C R
+qReturnToEnd D qReturnToEnd D R
+qReturnToEnd E qFindB E L
+# Marca las b de derecha a izquierda y aumenta el contador compacto
+qFindB b qSeekBGroup B L
+qFindB d qSeekBGroup D L
+qFindB a qFindB a L
+qFindB c qFindB c L
+qFindB A qFindB A L
+qFindB B qFindB B L
+qFindB C qFindB C L
+qFindB D qFindB D L
+qFindB 0 qGoToEnd 0 R
+qFindB 1 qGoToEnd 1 R
+qSeekBGroup a qSeekBGroup a L
+qSeekBGroup b qSeekBGroup b L
+qSeekBGroup c qSeekBGroup c L
+qSeekBGroup d qSeekBGroup d L
+qSeekBGroup A qSeekBGroup A L
+qSeekBGroup B qSeekBGroup B L
+qSeekBGroup C qSeekBGroup C L
+qSeekBGroup D qSeekBGroup D L
+qSeekBGroup 0 qSeekBGroup 0 L
+qSeekBGroup 1 qSeekBGroup 1 L
+qSeekBGroup : qSeekBBlock : L
+qSeekBBlock 1 qSeekBBlock 1 L
+qSeekBBlock 0 qReturnToEnd 1 R
+qSeekBBlock . qReturnToEnd 1 R
+# Borra la entrada y el separador temporal y lleva la cabeza al primer simbolo
+qGoToEnd a qGoToEnd a R
+qGoToEnd b qGoToEnd b R
+qGoToEnd c qGoToEnd c R
+qGoToEnd d qGoToEnd d R
+qGoToEnd A qGoToEnd A R
+qGoToEnd B qGoToEnd B R
+qGoToEnd C qGoToEnd C R
+qGoToEnd D qGoToEnd D R
+qGoToEnd E qEraseInput . L
+qEraseInput A qEraseInput . L
+qEraseInput B qEraseInput . L
+qEraseInput C qEraseInput . L
+qEraseInput D qEraseInput . L
+qEraseInput 0 qEraseDelimiter 0 L
+qEraseInput 1 qEraseDelimiter 1 L
+qEraseDelimiter 0 qEraseDelimiter 0 L
+qEraseDelimiter 1 qEraseDelimiter 1 L
+qEraseDelimiter : qLocateResult . L
+qLocateResult 0 qLocateResult 0 L
+qLocateResult 1 qLocateResult 1 L
+qLocateResult . qAccept . R

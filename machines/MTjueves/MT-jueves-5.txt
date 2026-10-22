@@ -1,0 +1,18 @@
+# Ejemplo de una MT
+q0 q1 q2 q3 f
+a b
+. a b
+q0
+.
+f
+1
+q0 b q0 b R
+q0 a q1 a R
+q0 . f . R
+q1 a q1 a R
+q1 b q2 b R
+q1 . f . R
+q2 b q2 b R
+q2 a q3 a R
+q3 b q0 b R
+
