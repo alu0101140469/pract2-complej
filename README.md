@@ -233,9 +233,9 @@ Es el punto de entrada del programa y coordina el resto de componentes. Procesa 
 
 Las opciones reconocidas son:
 
-- `-config <fichero>`: obligatorio; contiene la definición de la MT.
-- `-in <fichero>`: opcional; contiene las cadenas de entrada.
-- `--max-steps <n>`: opcional; establece un límite de seguridad para la ejecución.
+- `-config <fichero>`: obligatorio, contiene la definición de la MT.
+- `-in <fichero>`: opcional, contiene las cadenas de entrada.
+- `--max-steps <n>`: opcional, establece un límite de seguridad para la ejecución.
 - `-h` o `--help`: muestra la ayuda.
 
 ### 7.2. `include/turing/Transition.h` y `src/Transition.cpp`
@@ -269,7 +269,7 @@ Esta representación dispersa evita reservar memoria para una cinta infinita: la
 
 - `read()`: lee el símbolo bajo la cabeza.
 - `symbolAt(position)`: consulta una posición concreta.
-- `write(symbol)`: escribe en la posición actual; si se escribe el blanco, elimina la celda del mapa.
+- `write(symbol)`: escribe en la posición actual, si se escribe el blanco, elimina la celda del mapa.
 - `move(direction)`: mueve la cabeza a izquierda o derecha.
 - `headPosition()`: devuelve la posición actual.
 - `render()`: produce una representación de la cinta y marca la celda actual con corchetes.
@@ -285,7 +285,7 @@ La clase **`TuringMachine`** es el motor de ejecución. Contiene una `MachineDef
 - `performStep()` aplica la transición: primero escribe en todas las cintas, después mueve todas las cabezas y finalmente actualiza el estado. Las lecturas se recogen antes de modificar las cintas, de modo que el paso implementa la variante simultánea.
 - `run(maxSteps)` repite la ejecución hasta que no haya transición o se alcance el límite opcional. Devuelve un `RunResult` con el estado de parada, la aceptación, el número de pasos y la indicación de si se alcanzó el límite.
 
-La aceptación se evalúa cuando la máquina se detiene normalmente: si el estado actual está en `F`, la entrada se acepta; de lo contrario, se rechaza. El límite opcional no altera esta definición de parada.
+La aceptación se evalúa cuando la máquina se detiene normalmente: si el estado actual está en `F`, la entrada se acepta, de lo contrario, se rechaza. El límite opcional no altera esta definición de parada.
 
 ### 7.7. Ficheros de pruebas
 
